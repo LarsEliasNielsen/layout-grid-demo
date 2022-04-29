@@ -18,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dk.tv2.layout.grid.theme.GridTheme
+import dk.tv2.layout.grid.ui.WindowSizeClass
 import dk.tv2.layout.grid.ui.grid.GridColumn
 import dk.tv2.layout.grid.ui.grid.GridGutter
 import dk.tv2.layout.grid.ui.grid.GridMarginEnd
 import dk.tv2.layout.grid.ui.grid.GridMarginStart
-import dk.tv2.layout.grid.ui.teaser.ContentProviderTeaser
-import dk.tv2.layout.grid.ui.teaser.TeaserRow
+import dk.tv2.layout.grid.ui.teaser.*
 import dk.tv2.layout.grid.ui.view.LabelCheckbox
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                         topBar = {
                             TopAppBar(
                                 title = {
-                                    Text(text = stringResource(R.string.app_name))
+                                    Text(text = "${stringResource(R.string.app_name)} (viewport: ${gridManager.getWindowWidth().name})")
                                 },
                                 actions = {
                                     val expandedActionMenu = remember { mutableStateOf(false) }
@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         },
                         content = {
+                            // Layout grid for debugging.
                             if (BuildConfig.DEBUG) {
                                 Row(Modifier.fillMaxSize()) {
                                     GridMarginStart(gridManager, checkedStateShowMargins.value)
@@ -82,17 +83,74 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
+                            // Teaser content.
                             Column(
                                 modifier = Modifier.verticalScroll(rememberScrollState()),
                                 verticalArrangement = Arrangement.spacedBy(32.dp)
                             ) {
-                                TeaserRow(gridManager, "Popular 1") { index ->
+                                // TODO: Add hero teasers.
+
+                                // Content provider teasers.
+                                TeaserRow(gridManager) { index ->
+                                    ContentProviderTeaser(
+                                        teaserWidthDp = gridManager.getColumnSpanWidth(
+                                            columnSpan = when (gridManager.getWindowWidth()) {
+                                                WindowSizeClass.EXPANDED -> 2
+                                                WindowSizeClass.MEDIUM -> 3
+                                                WindowSizeClass.COMPACT -> 4
+                                            }
+                                        ),
+                                        title = "CPT #$index"
+                                    )
+                                }
+
+                                // Series teasers.
+                                TeaserRow(gridManager, "Popular") {
+                                    SeriesTeaser(
+                                        teaserWidthDp = gridManager.getColumnSpanWidth(
+                                            columnSpan = when (gridManager.getWindowWidth()) {
+                                                WindowSizeClass.EXPANDED -> 4
+                                                WindowSizeClass.MEDIUM -> 6
+                                                WindowSizeClass.COMPACT -> 10
+                                            }
+                                        )
+                                    )
+                                }
+
+                                // Episode teasers.
+                                TeaserRow(gridManager, "Continue watching") {
+                                    EpisodeTeaser(
+                                        teaserWidthDp = gridManager.getColumnSpanWidth(
+                                            columnSpan = when (gridManager.getWindowWidth()) {
+                                                WindowSizeClass.EXPANDED -> 3
+                                                WindowSizeClass.MEDIUM -> 4
+                                                WindowSizeClass.COMPACT -> 6
+                                            }
+                                        )
+                                    )
+                                }
+
+                                // Movie teasers.
+                                TeaserRow(gridManager, "Movies") {
+                                    MovieTeaser(
+                                        teaserWidthDp = gridManager.getColumnSpanWidth(
+                                            columnSpan = when (gridManager.getWindowWidth()) {
+                                                WindowSizeClass.EXPANDED -> 2
+                                                WindowSizeClass.MEDIUM -> 3
+                                                WindowSizeClass.COMPACT -> 4
+                                            }
+                                        )
+                                    )
+                                }
+
+                                // Test teasers.
+                                TeaserRow(gridManager, "Test 1") { index ->
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1), "CPT #$index")
                                 }
-                                TeaserRow(gridManager, "Popular 2") { index ->
+                                TeaserRow(gridManager, "Test 2") { index ->
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 2), "CPT #$index")
                                 }
-                                TeaserRow(gridManager, "Popular 3") { index ->
+                                TeaserRow(gridManager, "Test 3") { index ->
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "CPT #$index")
                                 }
                             }

@@ -16,18 +16,30 @@ private val DarkColorPalette = darkColors(
     primary = Purple200,
     primaryVariant = Purple700,
     secondary = Teal200,
+    secondaryVariant = Teal500,
     background = Color.Black,
+    surface = Color.Black,
+    error = Color.White,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black,
+    onBackground = Color.White,
     onSurface = Color.White,
-    onBackground = Color.White
+    onError = Color.Black
 )
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
     secondary = Teal200,
+    secondaryVariant = Teal500,
     background = Color.White,
+    surface = Color.White,
+    error = Color.White,
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
     onSurface = Color.Black,
-    onBackground = Color.Black
+    onError = Color.Black
 )
 
 private val Typography = Typography(

@@ -15,12 +15,10 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dk.tv2.layout.grid.theme.GridTheme
 import dk.tv2.layout.grid.ui.Viewport
-import dk.tv2.layout.grid.ui.WindowSizeClass
 import dk.tv2.layout.grid.ui.grid.GridColumn
 import dk.tv2.layout.grid.ui.grid.GridGutter
 import dk.tv2.layout.grid.ui.grid.GridMarginEnd
@@ -77,12 +75,12 @@ class MainActivity : AppCompatActivity() {
                                             title = { Text(text = "Info") },
                                             text = {
                                                 Column {
-                                                    Text(text = "WindowSizeClass: ${gridManager.getViewport().name}", color = Color.White)
-                                                    Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}", color = Color.White)
-                                                    Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}", color = Color.White)
-                                                    Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}", color = Color.White)
-                                                    Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}", color = Color.White)
-                                                    Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}", color = Color.White)
+                                                    Text(text = "WindowSizeClass: ${gridManager.getViewport().name}")
+                                                    Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}")
+                                                    Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}")
+                                                    Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}")
+                                                    Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}")
+                                                    Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}")
                                                 }
                                             },
                                             confirmButton = {

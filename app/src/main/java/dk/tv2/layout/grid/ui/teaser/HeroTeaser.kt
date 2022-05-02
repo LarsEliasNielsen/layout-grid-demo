@@ -2,13 +2,11 @@ package dk.tv2.layout.grid.ui.teaser
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -54,8 +52,11 @@ fun HeroTeaserPager(gridManager: GridManager) {
     HorizontalPager(
         count = 10,
         state = pagerState,
-        itemSpacing = gridManager.gutter,
-        contentPadding = PaddingValues(start = gridManager.marginStart, top = 0.dp, end = gridManager.marginEnd, bottom = 0.dp)
+        itemSpacing = gridManager.gutter(),
+        contentPadding = PaddingValues(
+            start = gridManager.marginStart(), top = 0.dp,
+            end = gridManager.marginEnd(), bottom = 0.dp
+        )
     ) { index ->
         HeroTeaser(gridManager.getWindowDpSize().width, "Hero $index")
     }

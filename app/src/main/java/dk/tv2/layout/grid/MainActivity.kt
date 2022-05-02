@@ -146,13 +146,13 @@ class MainActivity : AppCompatActivity() {
 
                                 // Test teasers.
                                 TeaserRow(gridManager, "Test 1") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1), "CPT #$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1), "T #1.$index")
                                 }
                                 TeaserRow(gridManager, "Test 2") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 2), "CPT #$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 2), "T #2.$index")
                                 }
                                 TeaserRow(gridManager, "Test 3") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "CPT #$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "T #3.$index")
                                 }
                             }
 

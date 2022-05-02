@@ -13,7 +13,7 @@ import dk.tv2.layout.grid.GridManager
 fun GridMarginStart(gridManager: GridManager, visible: Boolean) {
     Box(
         modifier = androidx.compose.ui.Modifier
-            .width(gridManager.marginStart)
+            .width(gridManager.marginStart())
             .fillMaxHeight()
             .alpha(if (visible) 1f else 0f)
             .background(Color(0x331AFF00))
@@ -24,7 +24,7 @@ fun GridMarginStart(gridManager: GridManager, visible: Boolean) {
 fun GridMarginEnd(gridManager: GridManager, visible: Boolean) {
     Box(
         modifier = androidx.compose.ui.Modifier
-            .width(gridManager.marginEnd)
+            .width(gridManager.marginEnd())
             .fillMaxHeight()
             .alpha(if (visible) 1f else 0f)
             .background(Color(0x331AFF00))

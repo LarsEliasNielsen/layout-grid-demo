@@ -18,7 +18,7 @@ fun TeaserRow(gridManager: GridManager, rowTitle: String? = null, content: @Comp
         if (rowTitle != null) {
             Box(
                 modifier = Modifier.padding(
-                    start = gridManager.marginStart,
+                    start = gridManager.marginStart(),
                     bottom = 12.dp
                 )
             ) {
@@ -30,10 +30,10 @@ fun TeaserRow(gridManager: GridManager, rowTitle: String? = null, content: @Comp
         }
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(
-                gridManager.gutter
+                gridManager.gutter()
             ),
             contentPadding = PaddingValues(
-                horizontal = gridManager.marginStart
+                horizontal = gridManager.marginStart()
             )
         ) {
             items(15) { index ->

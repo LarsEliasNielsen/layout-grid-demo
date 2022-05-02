@@ -22,17 +22,32 @@ class GridManager(private val activity: Activity) {
     /**
      * Left/start margin of screen content.
      */
-    val marginStart: Dp = 12.dp
+    @Composable
+    fun marginStart(): Dp = when (getWindowWidth()) {
+        WindowSizeClass.EXPANDED -> 96.dp
+        WindowSizeClass.MEDIUM -> 24.dp
+        WindowSizeClass.COMPACT -> 12.dp
+    }
 
     /**
      * Right(end margin of screen content.
      */
-    val marginEnd: Dp = 24.dp
+    @Composable
+    fun marginEnd(): Dp = when (getWindowWidth()) {
+        WindowSizeClass.EXPANDED -> 192.dp
+        WindowSizeClass.MEDIUM -> 48.dp
+        WindowSizeClass.COMPACT -> 24.dp
+    }
 
     /**
      * Space between columns.
      */
-    val gutter: Dp = 8.dp
+    @Composable
+    fun gutter(): Dp = when (getWindowWidth()) {
+        WindowSizeClass.EXPANDED -> 16.dp
+        WindowSizeClass.MEDIUM -> 16.dp
+        WindowSizeClass.COMPACT -> 8.dp
+    }
 
     @Composable
     fun getWindowDpSize(): DpSize {
@@ -65,7 +80,9 @@ class GridManager(private val activity: Activity) {
     fun getColumnWidth(): Dp = (getWindowDpSize().width - getMarginSize() - getGutterTotal())
         .div(columns)
 
-    private fun getMarginSize(): Dp = marginStart + marginEnd
+    @Composable
+    private fun getMarginSize(): Dp = marginStart() + marginEnd()
 
-    private fun getGutterTotal(columnSpan: Int = columns): Dp = gutter.times(columnSpan - 1)
+    @Composable
+    private fun getGutterTotal(columnSpan: Int = columns): Dp = gutter().times(columnSpan - 1)
 }

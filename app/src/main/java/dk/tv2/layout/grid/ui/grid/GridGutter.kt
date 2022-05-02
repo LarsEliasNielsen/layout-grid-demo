@@ -14,7 +14,7 @@ import dk.tv2.layout.grid.GridManager
 fun GridGutter(gridManager: GridManager, visible: Boolean) {
     Box(
         modifier = Modifier
-            .width(gridManager.gutter)
+            .width(gridManager.gutter())
             .fillMaxHeight()
             .alpha(if (visible) 1f else 0f)
             .background(Color(0x330037FF))

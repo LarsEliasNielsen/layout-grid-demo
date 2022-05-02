@@ -55,10 +55,9 @@ class GridManager(private val activity: Activity) {
         }
     }
 
+    // TODO: Fix rounding errors.
     @Composable
-    fun getColumnSpanWidth(columnSpan: Int): Dp =
-        (getWindowDpSize().width - getMarginSize() - getGutterTotal())
-            .div(columns)
+    fun getColumnSpanWidth(columnSpan: Int): Dp = getColumnWidth()
             .times(columnSpan)
             .plus(getGutterTotal(columnSpan))
 

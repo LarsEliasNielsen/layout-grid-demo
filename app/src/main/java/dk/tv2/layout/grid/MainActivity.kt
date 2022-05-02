@@ -88,7 +88,8 @@ class MainActivity : AppCompatActivity() {
                                 modifier = Modifier.verticalScroll(rememberScrollState()),
                                 verticalArrangement = Arrangement.spacedBy(32.dp)
                             ) {
-                                // TODO: Add hero teasers.
+                                // Hero teasers.
+                                HeroTeaserPager(gridManager)
 
                                 // Content provider teasers.
                                 TeaserRow(gridManager) { index ->

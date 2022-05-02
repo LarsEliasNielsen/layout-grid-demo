@@ -50,6 +50,9 @@ dependencies {
     // Window, form factor and multi-window
     implementation "androidx.window:window:1.0.0"
 
+    // Debug
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
     androidTestImplementation "androidx.test.ext:junit:1.1.3"

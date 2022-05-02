@@ -11,10 +11,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dk.tv2.layout.grid.theme.GridTheme
@@ -25,6 +27,7 @@ import dk.tv2.layout.grid.ui.grid.GridMarginEnd
 import dk.tv2.layout.grid.ui.grid.GridMarginStart
 import dk.tv2.layout.grid.ui.teaser.*
 import dk.tv2.layout.grid.ui.view.LabelCheckbox
+import dk.tv2.layout.grid.ui.view.LabelIcon
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                                 },
                                 actions = {
                                     val expandedActionMenu = remember { mutableStateOf(false) }
+                                    val openInfoDialog = remember { mutableStateOf(false)  }
 
                                     IconButton(onClick = { expandedActionMenu.value = true }) {
                                         Icon(
@@ -64,6 +68,29 @@ class MainActivity : AppCompatActivity() {
                                         LabelCheckbox(checkedStateShowColumns, stringResource(R.string.menu_action_settings_show_columns))
                                         LabelCheckbox(checkedStateShowGutters, stringResource(R.string.menu_action_settings_show_gutters))
                                         LabelCheckbox(checkedStateShowMargins, stringResource(R.string.menu_action_settings_show_margins))
+                                        LabelIcon(openInfoDialog, stringResource(R.string.menu_action_settings_show_info))
+                                    }
+
+                                    if (openInfoDialog.value) {
+                                        AlertDialog(
+                                            onDismissRequest = { openInfoDialog.value = false },
+                                            title = { Text(text = "Info") },
+                                            text = {
+                                                Column {
+                                                    Text(text = "WindowSizeClass: ${gridManager.getWindowWidth().name}", color = Color.White)
+                                                    Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}", color = Color.White)
+                                                    Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}", color = Color.White)
+                                                    Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}", color = Color.White)
+                                                    Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}", color = Color.White)
+                                                    Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}", color = Color.White)
+                                                }
+                                            },
+                                            confirmButton = {
+                                                Button(onClick = { openInfoDialog.value = false }) {
+                                                    Text(text = "OK")
+                                                }
+                                            }
+                                        )
                                     }
                                 }
                             )
@@ -155,15 +182,6 @@ class MainActivity : AppCompatActivity() {
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "T #3.$index")
                                 }
                             }
-
-//                            Column {
-//                                Text(text = "WindowSizeClass: ${gridManager.getWindowWidth().name}", color = Color.White)
-//                                Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}", color = Color.White)
-//                                Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}", color = Color.White)
-//                                Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}", color = Color.White)
-//                                Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}", color = Color.White)
-//                                Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}", color = Color.White)
-//                            }
                         }
                     )
                 }

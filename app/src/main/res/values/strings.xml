@@ -5,4 +5,5 @@
     <string name="menu_action_settings_show_columns">Show columns</string>
     <string name="menu_action_settings_show_gutters">Show gutters</string>
     <string name="menu_action_settings_show_margins">Show margins</string>
+    <string name="menu_action_settings_show_info">More info</string>
 </resources>

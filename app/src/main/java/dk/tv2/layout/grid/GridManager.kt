@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetricsCalculator
-import dk.tv2.layout.grid.ui.WindowSizeClass
+import dk.tv2.layout.grid.ui.Viewport
 
 class GridManager(private val activity: Activity) {
 
@@ -23,30 +23,30 @@ class GridManager(private val activity: Activity) {
      * Left/start margin of screen content.
      */
     @Composable
-    fun marginStart(): Dp = when (getWindowWidth()) {
-        WindowSizeClass.EXPANDED -> 96.dp
-        WindowSizeClass.MEDIUM -> 24.dp
-        WindowSizeClass.COMPACT -> 12.dp
+    fun marginStart(): Dp = when (getViewport()) {
+        Viewport.XLARGE -> 96.dp
+        Viewport.LARGE -> 24.dp
+        Viewport.SMALL -> 12.dp
     }
 
     /**
      * Right(end margin of screen content.
      */
     @Composable
-    fun marginEnd(): Dp = when (getWindowWidth()) {
-        WindowSizeClass.EXPANDED -> 192.dp
-        WindowSizeClass.MEDIUM -> 48.dp
-        WindowSizeClass.COMPACT -> 24.dp
+    fun marginEnd(): Dp = when (getViewport()) {
+        Viewport.XLARGE -> 192.dp
+        Viewport.LARGE -> 48.dp
+        Viewport.SMALL -> 24.dp
     }
 
     /**
      * Space between columns.
      */
     @Composable
-    fun gutter(): Dp = when (getWindowWidth()) {
-        WindowSizeClass.EXPANDED -> 16.dp
-        WindowSizeClass.MEDIUM -> 16.dp
-        WindowSizeClass.COMPACT -> 8.dp
+    fun gutter(): Dp = when (getViewport()) {
+        Viewport.XLARGE -> 16.dp
+        Viewport.LARGE -> 16.dp
+        Viewport.SMALL -> 8.dp
     }
 
     @Composable
@@ -61,12 +61,12 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
-    fun getWindowWidth(): WindowSizeClass {
+    fun getViewport(): Viewport {
         val windowDpSize = getWindowDpSize()
         return when {
-            windowDpSize.width > 840.dp -> WindowSizeClass.EXPANDED
-            windowDpSize.width > 600.dp -> WindowSizeClass.MEDIUM
-            else -> WindowSizeClass.COMPACT
+            windowDpSize.width > 840.dp -> Viewport.XLARGE
+            windowDpSize.width > 600.dp -> Viewport.LARGE
+            else -> Viewport.SMALL
         }
     }
 

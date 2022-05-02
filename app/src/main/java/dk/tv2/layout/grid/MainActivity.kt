@@ -11,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dk.tv2.layout.grid.theme.GridTheme
+import dk.tv2.layout.grid.ui.Viewport
 import dk.tv2.layout.grid.ui.WindowSizeClass
 import dk.tv2.layout.grid.ui.grid.GridColumn
 import dk.tv2.layout.grid.ui.grid.GridGutter
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                         topBar = {
                             TopAppBar(
                                 title = {
-                                    Text(text = "${stringResource(R.string.app_name)} (viewport: ${gridManager.getWindowWidth().name})")
+                                    Text(text = "${stringResource(R.string.app_name)} (viewport: ${gridManager.getViewport().name})")
                                 },
                                 actions = {
                                     val expandedActionMenu = remember { mutableStateOf(false) }
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                                             title = { Text(text = "Info") },
                                             text = {
                                                 Column {
-                                                    Text(text = "WindowSizeClass: ${gridManager.getWindowWidth().name}", color = Color.White)
+                                                    Text(text = "WindowSizeClass: ${gridManager.getViewport().name}", color = Color.White)
                                                     Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}", color = Color.White)
                                                     Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}", color = Color.White)
                                                     Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}", color = Color.White)
@@ -122,10 +122,10 @@ class MainActivity : AppCompatActivity() {
                                 TeaserRow(gridManager) { index ->
                                     ContentProviderTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
-                                            columnSpan = when (gridManager.getWindowWidth()) {
-                                                WindowSizeClass.EXPANDED -> 2
-                                                WindowSizeClass.MEDIUM -> 3
-                                                WindowSizeClass.COMPACT -> 4
+                                            columnSpan = when (gridManager.getViewport()) {
+                                                Viewport.XLARGE -> 2
+                                                Viewport.LARGE -> 3
+                                                Viewport.SMALL -> 4
                                             }
                                         ),
                                         title = "CPT #$index"
@@ -136,10 +136,10 @@ class MainActivity : AppCompatActivity() {
                                 TeaserRow(gridManager, "Popular") {
                                     SeriesTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
-                                            columnSpan = when (gridManager.getWindowWidth()) {
-                                                WindowSizeClass.EXPANDED -> 4
-                                                WindowSizeClass.MEDIUM -> 6
-                                                WindowSizeClass.COMPACT -> 10
+                                            columnSpan = when (gridManager.getViewport()) {
+                                                Viewport.XLARGE -> 4
+                                                Viewport.LARGE -> 6
+                                                Viewport.SMALL -> 10
                                             }
                                         )
                                     )
@@ -149,10 +149,10 @@ class MainActivity : AppCompatActivity() {
                                 TeaserRow(gridManager, "Continue watching") {
                                     EpisodeTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
-                                            columnSpan = when (gridManager.getWindowWidth()) {
-                                                WindowSizeClass.EXPANDED -> 3
-                                                WindowSizeClass.MEDIUM -> 4
-                                                WindowSizeClass.COMPACT -> 6
+                                            columnSpan = when (gridManager.getViewport()) {
+                                                Viewport.XLARGE -> 3
+                                                Viewport.LARGE -> 4
+                                                Viewport.SMALL -> 6
                                             }
                                         )
                                     )
@@ -162,10 +162,10 @@ class MainActivity : AppCompatActivity() {
                                 TeaserRow(gridManager, "Movies") {
                                     MovieTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
-                                            columnSpan = when (gridManager.getWindowWidth()) {
-                                                WindowSizeClass.EXPANDED -> 2
-                                                WindowSizeClass.MEDIUM -> 3
-                                                WindowSizeClass.COMPACT -> 4
+                                            columnSpan = when (gridManager.getViewport()) {
+                                                Viewport.XLARGE -> 2
+                                                Viewport.LARGE -> 3
+                                                Viewport.SMALL -> 4
                                             }
                                         )
                                     )

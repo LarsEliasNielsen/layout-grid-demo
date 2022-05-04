@@ -63,6 +63,12 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
+    fun getWindowWidthDp(): Dp = floor(getWindowDpSize().width.value).dp
+
+    @Composable
+    fun getWindowHeightDp(): Dp = floor(getWindowDpSize().height.value).dp
+
+    @Composable
     fun getViewport(): Viewport {
         val windowDpSize = getWindowDpSize()
         return when {
@@ -78,7 +84,7 @@ class GridManager(private val activity: Activity) {
             .plus(getGutterTotal(columnSpan))
 
     @Composable
-    fun getColumnWidth(): Dp = (floor(getWindowDpSize().width.value).dp - getMarginSize() - getGutterTotal())
+    fun getColumnWidth(): Dp = (getWindowWidthDp() - getMarginSize() - getGutterTotal())
         .div(columns)
         .value.roundToInt().dp
 

@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -36,9 +37,9 @@ class MainActivity : AppCompatActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    val checkedStateShowColumns = remember { mutableStateOf(true) }
-                    val checkedStateShowGutters = remember { mutableStateOf(false) }
-                    val checkedStateShowMargins = remember { mutableStateOf(false) }
+                    val checkedStateShowColumns = rememberSaveable { mutableStateOf(true) }
+                    val checkedStateShowGutters = rememberSaveable { mutableStateOf(false) }
+                    val checkedStateShowMargins = rememberSaveable { mutableStateOf(false) }
 
                     Scaffold(
                         topBar = {
@@ -75,7 +76,9 @@ class MainActivity : AppCompatActivity() {
                                                 Column {
                                                     Text(text = "WindowSizeClass: ${gridManager.getViewport().name}")
                                                     Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}")
+                                                    Text(text = "getWindowWidthDp: ${gridManager.getWindowWidthDp()}")
                                                     Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}")
+                                                    Text(text = "getWindowHeightDp: ${gridManager.getWindowHeightDp()}")
                                                     Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}")
                                                     Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}")
                                                     Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}")
@@ -121,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                                     GridMarginEnd(
                                         gridManager = gridManager,
                                         visible = checkedStateShowMargins.value,
-                                        modifier = Modifier.offset(x = gridManager.getWindowDpSize().width - gridManager.marginEnd())
+                                        modifier = Modifier.offset(x = gridManager.getWindowWidthDp() - gridManager.marginEnd())
                                     )
                                 }
                             }

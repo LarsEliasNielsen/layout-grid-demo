@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetricsCalculator
 import dk.tv2.layout.grid.ui.Viewport
+import kotlin.math.floor
+import kotlin.math.roundToInt
 
 class GridManager(private val activity: Activity) {
 
@@ -34,7 +36,7 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginEnd(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 192.dp
+        Viewport.XLARGE -> 164.dp
         Viewport.LARGE -> 48.dp
         Viewport.SMALL -> 24.dp
     }
@@ -70,15 +72,15 @@ class GridManager(private val activity: Activity) {
         }
     }
 
-    // TODO: Fix rounding errors.
     @Composable
     fun getColumnSpanWidth(columnSpan: Int): Dp = getColumnWidth()
             .times(columnSpan)
             .plus(getGutterTotal(columnSpan))
 
     @Composable
-    fun getColumnWidth(): Dp = (getWindowDpSize().width - getMarginSize() - getGutterTotal())
+    fun getColumnWidth(): Dp = (floor(getWindowDpSize().width.value).dp - getMarginSize() - getGutterTotal())
         .div(columns)
+        .value.roundToInt().dp
 
     @Composable
     private fun getMarginSize(): Dp = marginStart() + marginEnd()

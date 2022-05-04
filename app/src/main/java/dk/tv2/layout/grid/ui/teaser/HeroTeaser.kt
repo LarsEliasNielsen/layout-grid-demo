@@ -58,6 +58,6 @@ fun HeroTeaserPager(gridManager: GridManager) {
             end = gridManager.marginEnd(), bottom = 0.dp
         )
     ) { index ->
-        HeroTeaser(gridManager.getWindowDpSize().width, "Hero $index")
+        HeroTeaser(gridManager.getColumnSpanWidth(columnSpan = 12), "Hero $index")
     }
 }

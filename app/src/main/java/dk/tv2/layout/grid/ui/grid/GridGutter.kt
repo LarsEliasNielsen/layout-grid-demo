@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.Color
 import dk.tv2.layout.grid.GridManager
 
 @Composable
-fun GridGutter(gridManager: GridManager, visible: Boolean) {
+fun GridGutter(gridManager: GridManager, visible: Boolean, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .width(gridManager.gutter())
             .fillMaxHeight()
             .alpha(if (visible) 1f else 0f)

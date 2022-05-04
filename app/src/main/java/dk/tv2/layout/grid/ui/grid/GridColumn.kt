@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.Color
 import dk.tv2.layout.grid.GridManager
 
 @Composable
-fun GridColumn(gridManager: GridManager, visible: Boolean) {
+fun GridColumn(gridManager: GridManager, visible: Boolean, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .width(gridManager.getColumnWidth())
             .fillMaxHeight()
             .alpha(if (visible) 1f else 0f)

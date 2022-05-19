@@ -3,7 +3,10 @@ package dk.tv2.layout.grid
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -12,7 +15,6 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -97,33 +99,29 @@ class MainActivity : AppCompatActivity() {
                         content = {
                             // Layout grid for debugging.
                             if (BuildConfig.DEBUG) {
-                                Box(Modifier.fillMaxSize()) {
+                                Row {
                                     GridMarginStart(
                                         gridManager = gridManager,
-                                        visible = checkedStateShowMargins.value,
-                                        modifier = Modifier.offset(x = 0.dp)
+                                        visible = checkedStateShowMargins.value
                                     )
 
                                     for (i in 0 until gridManager.columns()) {
                                         GridColumn(
                                             gridManager = gridManager,
-                                            visible = checkedStateShowColumns.value,
-                                            modifier = Modifier.offset(x = gridManager.marginStart() + (gridManager.getColumnWidth() * i) + (gridManager.gutter() * i))
+                                            visible = checkedStateShowColumns.value
                                         )
-                                    }
 
-                                    for (i in 0..10) {
-                                        GridGutter(
-                                            gridManager = gridManager,
-                                            visible = checkedStateShowGutters.value,
-                                            modifier = Modifier.offset(x = gridManager.marginStart() + (gridManager.getColumnWidth() * (i + 1)) + (gridManager.gutter() * i))
-                                        )
+                                        if (i < (gridManager.columns() - 1)) {
+                                            GridGutter(
+                                                gridManager = gridManager,
+                                                visible = checkedStateShowGutters.value
+                                            )
+                                        }
                                     }
 
                                     GridMarginEnd(
                                         gridManager = gridManager,
-                                        visible = checkedStateShowMargins.value,
-                                        modifier = Modifier.offset(x = gridManager.getWindowWidthDp() - gridManager.marginEnd())
+                                        visible = checkedStateShowMargins.value
                                     )
                                 }
                             }

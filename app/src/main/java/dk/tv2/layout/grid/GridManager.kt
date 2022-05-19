@@ -11,8 +11,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetricsCalculator
 import dk.tv2.layout.grid.ui.Viewport
-import kotlin.math.floor
-import kotlin.math.roundToInt
 
 class GridManager(private val activity: Activity) {
 
@@ -72,10 +70,10 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
-    fun getWindowWidthDp(): Dp = floor(getWindowDpSize().width.value).dp
+    fun getWindowWidthDp(): Dp = getWindowDpSize().width.value.dp
 
     @Composable
-    fun getWindowHeightDp(): Dp = floor(getWindowDpSize().height.value).dp
+    fun getWindowHeightDp(): Dp = getWindowDpSize().height.value.dp
 
     @Composable
     fun getViewport(): Viewport {
@@ -96,7 +94,7 @@ class GridManager(private val activity: Activity) {
     @Composable
     fun getColumnWidth(): Dp = (getWindowWidthDp() - getMarginSize() - getGutterTotal())
         .div(columns())
-        .value.roundToInt().dp
+        .value.dp
 
     @Composable
     private fun getMarginSize(): Dp = marginStart() + marginEnd()

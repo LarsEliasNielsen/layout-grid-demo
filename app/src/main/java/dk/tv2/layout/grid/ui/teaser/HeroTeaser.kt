@@ -15,14 +15,13 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import dk.tv2.layout.grid.GridManager
-import dk.tv2.layout.grid.ui.Viewport
 
 /**
  * Large teaser showing featured content.
  */
 @Preview
 @Composable
-fun HeroTeaser(teaserWidthDp: Dp = 100.dp, heroTitle: String = "HT") {
+fun HeroTeaser(teaserWidthDp: Dp = 100.dp, title: String = "HT") {
     Box(
         Modifier
             .width(teaserWidthDp)
@@ -35,7 +34,7 @@ fun HeroTeaser(teaserWidthDp: Dp = 100.dp, heroTitle: String = "HT") {
         ) {
             Text(
                 style = MaterialTheme.typography.body1,
-                text = heroTitle
+                text = title
             )
         }
     }
@@ -60,15 +59,10 @@ fun HeroTeaserPager(gridManager: GridManager) {
         )
     ) { index ->
         HeroTeaser(
-            gridManager.getColumnSpanWidth(
-                columnSpan = when (gridManager.getViewport()) {
-                    Viewport.XLARGE -> 8
-                    Viewport.LARGE -> 8
-                    Viewport.MEDIUM -> 12
-                    Viewport.SMALL -> 12
-                }
+            teaserWidthDp = gridManager.getColumnSpanWidth(
+                columnSpan = gridManager.columns()
             ),
-            "Hero $index"
+            title = "Hero $index"
         )
     }
 }

@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                                                     Text(text = "getWindowWidthDp: ${gridManager.getWindowWidthDp()}")
                                                     Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}")
                                                     Text(text = "getWindowHeightDp: ${gridManager.getWindowHeightDp()}")
-                                                    Text(text = "getWidth = ${gridManager.columns}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns)}")
+                                                    Text(text = "getWidth = ${gridManager.columns()}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns())}")
                                                     Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}")
                                                     Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}")
                                                 }
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
                         },
                         content = {
                             // Layout grid for debugging.
-                            @OptIn(ExperimentalComposeUiApi::class)
                             if (BuildConfig.DEBUG) {
                                 Box(Modifier.fillMaxSize()) {
                                     GridMarginStart(
@@ -105,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                                         modifier = Modifier.offset(x = 0.dp)
                                     )
 
-                                    for (i in 0..11) {
+                                    for (i in 0 until gridManager.columns()) {
                                         GridColumn(
                                             gridManager = gridManager,
                                             visible = checkedStateShowColumns.value,
@@ -143,7 +142,8 @@ class MainActivity : AppCompatActivity() {
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
                                                 Viewport.XLARGE -> 2
-                                                Viewport.LARGE -> 3
+                                                Viewport.LARGE -> 2
+                                                Viewport.MEDIUM -> 3
                                                 Viewport.SMALL -> 4
                                             }
                                         ),
@@ -157,8 +157,9 @@ class MainActivity : AppCompatActivity() {
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
                                                 Viewport.XLARGE -> 4
-                                                Viewport.LARGE -> 6
-                                                Viewport.SMALL -> 10
+                                                Viewport.LARGE -> 4
+                                                Viewport.MEDIUM -> 6
+                                                Viewport.SMALL -> 9
                                             }
                                         )
                                     )
@@ -170,7 +171,8 @@ class MainActivity : AppCompatActivity() {
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
                                                 Viewport.XLARGE -> 3
-                                                Viewport.LARGE -> 4
+                                                Viewport.LARGE -> 3
+                                                Viewport.MEDIUM -> 4
                                                 Viewport.SMALL -> 6
                                             }
                                         )
@@ -182,8 +184,9 @@ class MainActivity : AppCompatActivity() {
                                     MovieTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
-                                                Viewport.XLARGE -> 2
+                                                Viewport.XLARGE -> 3
                                                 Viewport.LARGE -> 3
+                                                Viewport.MEDIUM -> 4
                                                 Viewport.SMALL -> 4
                                             }
                                         )

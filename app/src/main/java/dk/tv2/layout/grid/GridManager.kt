@@ -19,15 +19,22 @@ class GridManager(private val activity: Activity) {
     /**
      * Number of columns to separate screen into.
      */
-    val columns: Int = 12
+    @Composable
+    fun columns(): Int = when (getViewport()) {
+        Viewport.XLARGE -> 8
+        Viewport.LARGE -> 8
+        Viewport.MEDIUM -> 12
+        Viewport.SMALL -> 12
+    }
 
     /**
      * Left/start margin of screen content.
      */
     @Composable
     fun marginStart(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 96.dp
-        Viewport.LARGE -> 24.dp
+        Viewport.XLARGE -> 40.dp
+        Viewport.LARGE -> 32.dp
+        Viewport.MEDIUM -> 16.dp
         Viewport.SMALL -> 12.dp
     }
 
@@ -36,9 +43,10 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginEnd(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 164.dp
-        Viewport.LARGE -> 48.dp
-        Viewport.SMALL -> 24.dp
+        Viewport.XLARGE -> 40.dp
+        Viewport.LARGE -> 32.dp
+        Viewport.MEDIUM -> 16.dp
+        Viewport.SMALL -> 16.dp
     }
 
     /**
@@ -48,6 +56,7 @@ class GridManager(private val activity: Activity) {
     fun gutter(): Dp = when (getViewport()) {
         Viewport.XLARGE -> 16.dp
         Viewport.LARGE -> 16.dp
+        Viewport.MEDIUM -> 16.dp
         Viewport.SMALL -> 8.dp
     }
 
@@ -72,8 +81,9 @@ class GridManager(private val activity: Activity) {
     fun getViewport(): Viewport {
         val windowDpSize = getWindowDpSize()
         return when {
-            windowDpSize.width > 840.dp -> Viewport.XLARGE
-            windowDpSize.width > 600.dp -> Viewport.LARGE
+            windowDpSize.width > 690.dp -> Viewport.XLARGE
+            windowDpSize.width > 840.dp -> Viewport.LARGE
+            windowDpSize.width > 600.dp -> Viewport.MEDIUM
             else -> Viewport.SMALL
         }
     }
@@ -85,12 +95,12 @@ class GridManager(private val activity: Activity) {
 
     @Composable
     fun getColumnWidth(): Dp = (getWindowWidthDp() - getMarginSize() - getGutterTotal())
-        .div(columns)
+        .div(columns())
         .value.roundToInt().dp
 
     @Composable
     private fun getMarginSize(): Dp = marginStart() + marginEnd()
 
     @Composable
-    private fun getGutterTotal(columnSpan: Int = columns): Dp = gutter().times(columnSpan - 1)
+    private fun getGutterTotal(columnSpan: Int = columns()): Dp = gutter().times(columnSpan - 1)
 }

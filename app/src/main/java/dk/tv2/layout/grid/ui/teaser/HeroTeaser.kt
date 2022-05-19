@@ -15,6 +15,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import dk.tv2.layout.grid.GridManager
+import dk.tv2.layout.grid.ui.Viewport
 
 /**
  * Large teaser showing featured content.
@@ -58,6 +59,16 @@ fun HeroTeaserPager(gridManager: GridManager) {
             end = gridManager.marginEnd(), bottom = 0.dp
         )
     ) { index ->
-        HeroTeaser(gridManager.getColumnSpanWidth(columnSpan = 12), "Hero $index")
+        HeroTeaser(
+            gridManager.getColumnSpanWidth(
+                columnSpan = when (gridManager.getViewport()) {
+                    Viewport.XLARGE -> 8
+                    Viewport.LARGE -> 8
+                    Viewport.MEDIUM -> 12
+                    Viewport.SMALL -> 12
+                }
+            ),
+            "Hero $index"
+        )
     }
 }

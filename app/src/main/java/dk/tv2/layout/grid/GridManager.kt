@@ -79,7 +79,7 @@ class GridManager(private val activity: Activity) {
     fun getViewport(): Viewport {
         val windowDpSize = getWindowDpSize()
         return when {
-            windowDpSize.width > 690.dp -> Viewport.XLARGE
+            windowDpSize.width > 960.dp -> Viewport.XLARGE
             windowDpSize.width > 840.dp -> Viewport.LARGE
             windowDpSize.width > 600.dp -> Viewport.MEDIUM
             else -> Viewport.SMALL

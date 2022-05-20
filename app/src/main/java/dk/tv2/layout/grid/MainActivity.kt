@@ -1,5 +1,6 @@
 package dk.tv2.layout.grid
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dk.tv2.layout.grid.theme.GridTheme
@@ -25,6 +29,7 @@ import dk.tv2.layout.grid.ui.grid.GridGutter
 import dk.tv2.layout.grid.ui.grid.GridMarginEnd
 import dk.tv2.layout.grid.ui.grid.GridMarginStart
 import dk.tv2.layout.grid.ui.teaser.*
+import dk.tv2.layout.grid.ui.view.KeyValueText
 import dk.tv2.layout.grid.ui.view.LabelCheckbox
 import dk.tv2.layout.grid.ui.view.LabelIcon
 
@@ -76,14 +81,15 @@ class MainActivity : AppCompatActivity() {
                                             title = { Text(text = "Info") },
                                             text = {
                                                 Column {
-                                                    Text(text = "WindowSizeClass: ${gridManager.getViewport().name}")
-                                                    Text(text = "getWindowDpSize.width: ${gridManager.getWindowDpSize().width}")
-                                                    Text(text = "getWindowWidthDp: ${gridManager.getWindowWidthDp()}")
-                                                    Text(text = "getWindowDpSize.height: ${gridManager.getWindowDpSize().height}")
-                                                    Text(text = "getWindowHeightDp: ${gridManager.getWindowHeightDp()}")
-                                                    Text(text = "getWidth = ${gridManager.columns()}: ${gridManager.getColumnSpanWidth(columnSpan = gridManager.columns())}")
-                                                    Text(text = "getWidth = 1: ${gridManager.getColumnSpanWidth(columnSpan = 1)}")
-                                                    Text(text = "getColumnWidth: ${gridManager.getColumnWidth()}")
+                                                    KeyValueText(key = "Viewport:", value = gridManager.getViewport().name)
+                                                    KeyValueText(key = "Gutter:", value = gridManager.gutter().toString())
+                                                    KeyValueText(key = "Margin start:", value = gridManager.marginStart().toString())
+                                                    KeyValueText(key = "Margin end:", value = gridManager.marginEnd().toString())
+                                                    KeyValueText(key = "Screen density:", value = LocalDensity.current.density.toString())
+                                                    KeyValueText(key = "Window width:", value = gridManager.getWindowWidthDp().toString())
+                                                    KeyValueText(key = "Window height:", value = gridManager.getWindowHeightDp().toString())
+                                                    KeyValueText(key = "Column width = ${gridManager.columns()}:", value = gridManager.getColumnSpanWidth(columnSpan = gridManager.columns()).toString())
+                                                    KeyValueText(key = "Column width = 1:", value = gridManager.getColumnSpanWidth(columnSpan = 1).toString())
                                                 }
                                             },
                                             confirmButton = {
@@ -150,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                                 }
 
                                 // Series teasers.
-                                TeaserRow(gridManager, "Popular") {
+                                TeaserRow(gridManager, "Popular") { index ->
                                     SeriesTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
@@ -159,12 +165,13 @@ class MainActivity : AppCompatActivity() {
                                                 Viewport.MEDIUM -> 6
                                                 Viewport.SMALL -> 9
                                             }
-                                        )
+                                        ),
+                                        title = "ST #$index"
                                     )
                                 }
 
                                 // Episode teasers.
-                                TeaserRow(gridManager, "Continue watching") {
+                                TeaserRow(gridManager, "Continue watching") { index ->
                                     EpisodeTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
@@ -173,12 +180,13 @@ class MainActivity : AppCompatActivity() {
                                                 Viewport.MEDIUM -> 4
                                                 Viewport.SMALL -> 6
                                             }
-                                        )
+                                        ),
+                                        title = "ET #$index"
                                     )
                                 }
 
                                 // Movie teasers.
-                                TeaserRow(gridManager, "Movies") {
+                                TeaserRow(gridManager, "Movies") { index ->
                                     MovieTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
@@ -187,7 +195,8 @@ class MainActivity : AppCompatActivity() {
                                                 Viewport.MEDIUM -> 4
                                                 Viewport.SMALL -> 4
                                             }
-                                        )
+                                        ),
+                                        title = "MT #$index"
                                     )
                                 }
 
@@ -200,6 +209,21 @@ class MainActivity : AppCompatActivity() {
                                 }
                                 TeaserRow(gridManager, "Test 3") { index ->
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "T #3.$index")
+                                }
+                                TeaserRow(gridManager, "Test 4") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 4), "T #4.$index")
+                                }
+                                TeaserRow(gridManager, "Test 5") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 5), "T #5.$index")
+                                }
+                                TeaserRow(gridManager, "Test 6") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 6), "T #6.$index")
+                                }
+                                TeaserRow(gridManager, "Test 7") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 7), "T #7.$index")
+                                }
+                                TeaserRow(gridManager, "Test 8") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 8), "T #8.$index")
                                 }
                             }
                         }

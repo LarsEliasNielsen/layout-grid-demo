@@ -48,14 +48,16 @@ fun HeroTeaser(teaserWidthDp: Dp = 100.dp, title: String = "HT") {
 @Composable
 fun HeroTeaserPager(gridManager: GridManager) {
     val pagerState = rememberPagerState(initialPage = 5)
+    val columnSpan = gridManager.columns()
+    val marginCenteredTeaser = (gridManager.getScreenWidthDp() - gridManager.getColumnSpanWidth(columnSpan)) / 2
 
     HorizontalPager(
         count = 10,
         state = pagerState,
         itemSpacing = gridManager.gutter(),
         contentPadding = PaddingValues(
-            start = gridManager.marginStart(), top = 0.dp,
-            end = gridManager.marginEnd(), bottom = 0.dp
+            start = marginCenteredTeaser, top = 0.dp,
+            end = marginCenteredTeaser, bottom = 0.dp
         )
     ) { index ->
         HeroTeaser(

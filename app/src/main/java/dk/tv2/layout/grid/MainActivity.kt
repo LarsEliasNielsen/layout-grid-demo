@@ -1,13 +1,9 @@
 package dk.tv2.layout.grid
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -17,8 +13,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -76,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                                     }
 
                                     if (openInfoDialog.value) {
+                                        val verticalSpacing = 8.dp
                                         AlertDialog(
                                             onDismissRequest = { openInfoDialog.value = false },
                                             title = { Text(text = "Info") },
@@ -83,11 +78,18 @@ class MainActivity : AppCompatActivity() {
                                                 Column {
                                                     KeyValueText(key = "Viewport:", value = gridManager.getViewport().name)
                                                     KeyValueText(key = "Gutter:", value = gridManager.gutter().toString())
+                                                    Spacer(modifier = Modifier.height(verticalSpacing))
                                                     KeyValueText(key = "Margin start:", value = gridManager.marginStart().toString())
                                                     KeyValueText(key = "Margin end:", value = gridManager.marginEnd().toString())
+                                                    Spacer(modifier = Modifier.height(verticalSpacing))
                                                     KeyValueText(key = "Screen density:", value = LocalDensity.current.density.toString())
+                                                    Spacer(modifier = Modifier.height(verticalSpacing))
+                                                    KeyValueText(key = "Screen width:", value = gridManager.getScreenWidthDp().toString())
+                                                    KeyValueText(key = "Screen height:", value = gridManager.getScreenHeightDp().toString())
+                                                    Spacer(modifier = Modifier.height(verticalSpacing))
                                                     KeyValueText(key = "Window width:", value = gridManager.getWindowWidthDp().toString())
                                                     KeyValueText(key = "Window height:", value = gridManager.getWindowHeightDp().toString())
+                                                    Spacer(modifier = Modifier.height(verticalSpacing))
                                                     KeyValueText(key = "Column width = ${gridManager.columns()}:", value = gridManager.getColumnSpanWidth(columnSpan = gridManager.columns()).toString())
                                                     KeyValueText(key = "Column width = 1:", value = gridManager.getColumnSpanWidth(columnSpan = 1).toString())
                                                 }

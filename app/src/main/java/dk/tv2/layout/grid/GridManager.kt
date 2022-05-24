@@ -59,7 +59,16 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
-    fun getWindowDpSize(): DpSize {
+    fun getScreenWidthDp(): Dp = LocalConfiguration.current.screenWidthDp.dp
+
+    @Composable
+    fun getScreenHeightDp(): Dp = LocalConfiguration.current.screenHeightDp.dp
+
+    @Composable
+    private fun getWindowDpSize(): DpSize {
+        // Measuring seems to be off sometimes, needs investigations.
+        // Comparing window bounds with screen width seems to show some opposing numbers sometimes.
+        // screenWidthDp seems to be very solid when window size changes, use that instead.
         val configuration = LocalConfiguration.current
         val windowMetrics = remember(configuration) {
             WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)
@@ -70,18 +79,18 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
-    fun getWindowWidthDp(): Dp = getWindowDpSize().width.value.dp
+    fun getWindowWidthDp(): Dp = getWindowDpSize().width
 
     @Composable
-    fun getWindowHeightDp(): Dp = getWindowDpSize().height.value.dp
+    fun getWindowHeightDp(): Dp = getWindowDpSize().height
 
     @Composable
     fun getViewport(): Viewport {
-        val windowDpSize = getWindowDpSize()
+        val width = getScreenWidthDp()
         return when {
-            windowDpSize.width > 960.dp -> Viewport.XLARGE
-            windowDpSize.width > 840.dp -> Viewport.LARGE
-            windowDpSize.width > 600.dp -> Viewport.MEDIUM
+            width > 960.dp -> Viewport.XLARGE
+            width > 840.dp -> Viewport.LARGE
+            width > 600.dp -> Viewport.MEDIUM
             else -> Viewport.SMALL
         }
     }
@@ -92,7 +101,7 @@ class GridManager(private val activity: Activity) {
             .plus(getGutterTotal(columnSpan))
 
     @Composable
-    fun getColumnWidth(): Dp = (getWindowWidthDp() - getMarginSize() - getGutterTotal())
+    fun getColumnWidth(): Dp = (getScreenWidthDp() - getMarginSize() - getGutterTotal())
         .div(columns())
         .value.dp
 

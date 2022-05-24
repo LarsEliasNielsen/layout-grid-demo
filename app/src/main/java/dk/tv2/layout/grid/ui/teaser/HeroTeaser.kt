@@ -49,7 +49,7 @@ fun HeroTeaser(teaserWidthDp: Dp = 100.dp, title: String = "HT") {
 fun HeroTeaserPager(gridManager: GridManager) {
     val pagerState = rememberPagerState(initialPage = 5)
     val columnSpan = gridManager.columns()
-    val marginCenteredTeaser = (gridManager.getScreenWidthDp() - gridManager.getColumnSpanWidth(columnSpan)) / 2
+    val marginCenteredTeaser = (gridManager.getScreenWidthDp() - gridManager.getColumnSpanWidth(columnSpan.toFloat())) / 2
 
     HorizontalPager(
         count = 10,
@@ -62,7 +62,7 @@ fun HeroTeaserPager(gridManager: GridManager) {
     ) { index ->
         HeroTeaser(
             teaserWidthDp = gridManager.getColumnSpanWidth(
-                columnSpan = gridManager.columns()
+                columnSpan = gridManager.columns().toFloat()
             ),
             title = "Hero $index"
         )

@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
                                                     KeyValueText(key = "Window width:", value = gridManager.getWindowWidthDp().toString())
                                                     KeyValueText(key = "Window height:", value = gridManager.getWindowHeightDp().toString())
                                                     Spacer(modifier = Modifier.height(verticalSpacing))
-                                                    KeyValueText(key = "Column width = ${gridManager.columns()}:", value = gridManager.getColumnSpanWidth(columnSpan = gridManager.columns()).toString())
-                                                    KeyValueText(key = "Column width = 1:", value = gridManager.getColumnSpanWidth(columnSpan = 1).toString())
+                                                    KeyValueText(key = "Column width = ${gridManager.columns()}:", value = gridManager.getColumnSpanWidth(columnSpan = gridManager.columns().toFloat()).toString())
+                                                    KeyValueText(key = "Column width = 1:", value = gridManager.getColumnSpanWidth(columnSpan = 1f).toString())
                                                 }
                                             },
                                             confirmButton = {
@@ -147,10 +147,10 @@ class MainActivity : AppCompatActivity() {
                                     ContentProviderTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
-                                                Viewport.XLARGE -> 2
-                                                Viewport.LARGE -> 2
-                                                Viewport.MEDIUM -> 3
-                                                Viewport.SMALL -> 4
+                                                Viewport.XLARGE -> 2f
+                                                Viewport.LARGE -> 2f
+                                                Viewport.MEDIUM -> 3f
+                                                Viewport.SMALL -> 4f
                                             }
                                         ),
                                         title = "CPT #$index"
@@ -162,10 +162,10 @@ class MainActivity : AppCompatActivity() {
                                     SeriesTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
-                                                Viewport.XLARGE -> 4
-                                                Viewport.LARGE -> 4
-                                                Viewport.MEDIUM -> 6
-                                                Viewport.SMALL -> 9
+                                                Viewport.XLARGE -> 4f
+                                                Viewport.LARGE -> 4f
+                                                Viewport.MEDIUM -> 6f
+                                                Viewport.SMALL -> 9f
                                             }
                                         ),
                                         title = "ST #$index"
@@ -177,10 +177,10 @@ class MainActivity : AppCompatActivity() {
                                     EpisodeTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
-                                                Viewport.XLARGE -> 3
-                                                Viewport.LARGE -> 3
-                                                Viewport.MEDIUM -> 4
-                                                Viewport.SMALL -> 6
+                                                Viewport.XLARGE -> 3f
+                                                Viewport.LARGE -> 3f
+                                                Viewport.MEDIUM -> 4f
+                                                Viewport.SMALL -> 6f
                                             }
                                         ),
                                         title = "ET #$index"
@@ -192,10 +192,10 @@ class MainActivity : AppCompatActivity() {
                                     MovieTeaser(
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
-                                                Viewport.XLARGE -> 3
-                                                Viewport.LARGE -> 3
-                                                Viewport.MEDIUM -> 4
-                                                Viewport.SMALL -> 4
+                                                Viewport.XLARGE -> 3f
+                                                Viewport.LARGE -> 3f
+                                                Viewport.MEDIUM -> 4f
+                                                Viewport.SMALL -> 4f
                                             }
                                         ),
                                         title = "MT #$index"
@@ -204,28 +204,31 @@ class MainActivity : AppCompatActivity() {
 
                                 // Test teasers.
                                 TeaserRow(gridManager, "Test 1") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1), "T #1.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1f), "T #1.$index")
+                                }
+                                TeaserRow(gridManager, "Test 1.5") { index ->
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 1.5f), "T #1.5.$index")
                                 }
                                 TeaserRow(gridManager, "Test 2") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 2), "T #2.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 2f), "T #2.$index")
                                 }
                                 TeaserRow(gridManager, "Test 3") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3), "T #3.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 3f), "T #3.$index")
                                 }
                                 TeaserRow(gridManager, "Test 4") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 4), "T #4.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 4f), "T #4.$index")
                                 }
                                 TeaserRow(gridManager, "Test 5") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 5), "T #5.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 5f), "T #5.$index")
                                 }
                                 TeaserRow(gridManager, "Test 6") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 6), "T #6.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 6f), "T #6.$index")
                                 }
                                 TeaserRow(gridManager, "Test 7") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 7), "T #7.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 7f), "T #7.$index")
                                 }
                                 TeaserRow(gridManager, "Test 8") { index ->
-                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 8), "T #8.$index")
+                                    ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 8f), "T #8.$index")
                                 }
                             }
                         }

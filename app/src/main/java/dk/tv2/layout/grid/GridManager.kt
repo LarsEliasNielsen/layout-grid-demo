@@ -96,7 +96,7 @@ class GridManager(private val activity: Activity) {
     }
 
     @Composable
-    fun getColumnSpanWidth(columnSpan: Int): Dp = getColumnWidth()
+    fun getColumnSpanWidth(columnSpan: Float): Dp = getColumnWidth()
             .times(columnSpan)
             .plus(getGutterTotal(columnSpan))
 
@@ -109,5 +109,5 @@ class GridManager(private val activity: Activity) {
     private fun getMarginSize(): Dp = marginStart() + marginEnd()
 
     @Composable
-    private fun getGutterTotal(columnSpan: Int = columns()): Dp = gutter().times(columnSpan - 1)
+    private fun getGutterTotal(columnSpan: Float = columns().toFloat()): Dp = gutter().times(columnSpan - 1)
 }

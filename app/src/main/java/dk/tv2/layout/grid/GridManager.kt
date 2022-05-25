@@ -30,9 +30,9 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginStart(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 40.dp
-        Viewport.LARGE -> 32.dp
-        Viewport.MEDIUM -> 16.dp
+        Viewport.XLARGE -> 128.dp
+        Viewport.LARGE -> 40.dp
+        Viewport.MEDIUM -> 32.dp
         Viewport.SMALL -> 12.dp
     }
 
@@ -41,9 +41,9 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginEnd(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 40.dp
-        Viewport.LARGE -> 32.dp
-        Viewport.MEDIUM -> 16.dp
+        Viewport.XLARGE -> 128.dp
+        Viewport.LARGE -> 40.dp
+        Viewport.MEDIUM -> 32.dp
         Viewport.SMALL -> 16.dp
     }
 

@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetricsCalculator
+import dk.tv2.layout.grid.theme.*
 import dk.tv2.layout.grid.ui.Viewport
 
 class GridManager(private val activity: Activity) {
@@ -30,10 +31,10 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginStart(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 128.dp
-        Viewport.LARGE -> 40.dp
-        Viewport.MEDIUM -> 32.dp
-        Viewport.SMALL -> 12.dp
+        Viewport.XLARGE -> S32
+        Viewport.LARGE -> S10
+        Viewport.MEDIUM -> S8
+        Viewport.SMALL -> S3
     }
 
     /**
@@ -41,10 +42,10 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun marginEnd(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 128.dp
-        Viewport.LARGE -> 40.dp
-        Viewport.MEDIUM -> 32.dp
-        Viewport.SMALL -> 16.dp
+        Viewport.XLARGE -> S32
+        Viewport.LARGE -> S10
+        Viewport.MEDIUM -> S8
+        Viewport.SMALL -> S4
     }
 
     /**
@@ -52,10 +53,10 @@ class GridManager(private val activity: Activity) {
      */
     @Composable
     fun gutter(): Dp = when (getViewport()) {
-        Viewport.XLARGE -> 16.dp
-        Viewport.LARGE -> 16.dp
-        Viewport.MEDIUM -> 16.dp
-        Viewport.SMALL -> 8.dp
+        Viewport.XLARGE -> S4
+        Viewport.LARGE -> S4
+        Viewport.MEDIUM -> S4
+        Viewport.SMALL -> S2
     }
 
     @Composable

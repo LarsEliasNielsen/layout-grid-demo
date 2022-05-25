@@ -230,6 +230,16 @@ class MainActivity : AppCompatActivity() {
                                 TeaserRow(gridManager, "Test 8") { index ->
                                     ContentProviderTeaser(gridManager.getColumnSpanWidth(columnSpan = 8f), "T #8.$index")
                                 }
+                                // Test teasers with DP.
+                                TeaserRow(gridManager, "Dp test 100") { index ->
+                                    AndroidDpTeaser(teaserWidthDp = 100.dp, title = "DP #$index")
+                                }
+                                TeaserRow(gridManager, "Dp test 200") { index ->
+                                    AndroidDpTeaser(teaserWidthDp = 200.dp, title = "DP #$index")
+                                }
+                                TeaserRow(gridManager, "Dp test 400") { index ->
+                                    AndroidDpTeaser(teaserWidthDp = 400.dp, title = "DP #$index")
+                                }
                             }
                         }
                     )

@@ -160,6 +160,7 @@ class MainActivity : AppCompatActivity() {
                                 // Series teasers.
                                 TeaserRow(gridManager, "Popular") { index ->
                                     SeriesTeaser(
+                                        viewport = gridManager.getViewport(),
                                         teaserWidthDp = gridManager.getColumnSpanWidth(
                                             columnSpan = when (gridManager.getViewport()) {
                                                 Viewport.XLARGE -> 4f
